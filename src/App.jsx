@@ -1,24 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, TrendingUp, FileText, Menu, Home } from 'lucide-react';
+import { Calendar, Users, TrendingUp, FileText, Menu, Home, Download, Moon, Sun, Settings, BarChart3 } from 'lucide-react';
 import './App.css';
 import backupData from './data/backup.json';
+import { calcularMetricas, exportToExcel, exportToCSV } from './utils/exportUtils';
+import { Calendario } from './components/Calendario';
+import { GerenciadorAtas } from './components/GerenciadorAtas';
+import { AnotacoesReembolsos } from './components/AnotacoesReembolsos';
+import { FinanceiroAvancado } from './components/FinanceiroAvancado';
+import { GerenciadorAgendamentos } from './components/GerenciadorAgendamentos';
+import logoKzero from './assets/kzero-logo.png';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [data, setData] = useState(backupData.dados);
+  const [metricas, setMetricas] = useState({});
+
+  const [profissionais] = useState(['Bianca', 'Janaína', 'Consultor 1', 'Consultor 2']);
 
   useEffect(() => {
-    // Carregar dados do localStorage se existirem
     const savedData = localStorage.getItem('kzerodiary_data');
     if (savedData) {
       setData(JSON.parse(savedData));
     }
+    
+    const savedDarkMode = localStorage.getItem('kzerodiary_darkmode');
+    if (savedDarkMode) {
+      setDarkMode(JSON.parse(savedDarkMode));
+    }
   }, []);
+
+  useEffect(() => {
+    setMetricas(calcularMetricas(data));
+  }, [data]);
+
+  useEffect(() => {
+    localStorage.setItem('kzerodiary_darkmode', JSON.stringify(darkMode));
+    document.body.classList.toggle('dark-mode', darkMode);
+  }, [darkMode]);
+
+  const setClientes = (novosDados) => {
+    setData({ ...data, clientes: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, clientes: novosDados }));
+  };
+
+  const setAgendamentos = (novosDados) => {
+    setData({ ...data, agendamentos: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, agendamentos: novosDados }));
+  };
+
+  const setFluxoCaixa = (novosDados) => {
+    setData({ ...data, fluxoCaixa: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, fluxoCaixa: novosDados }));
+  };
+
+  const setAnotacoes = (novosDados) => {
+    setData({ ...data, anotacoes: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, anotacoes: novosDados }));
+  };
+
+  const setReembolsos = (novosDados) => {
+    setData({ ...data, reembolsos: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, reembolsos: novosDados }));
+  };
+
+  const setAtas = (novosDados) => {
+    setData({ ...data, atas: novosDados });
+    localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, atas: novosDados }));
+  };
 
   const exportData = () => {
     const backup = {
-      versao: '1.0',
+      versao: '2.0',
       geradoEm: new Date().toISOString(),
       dados: data
     };
@@ -34,10 +88,8 @@ function App() {
   const getDashboardStats = () => {
     const totalClientes = data.clientes.length;
     const totalAgendamentos = data.agendamentos.length;
-    const totalFaturamento = data.agendamentos.reduce((sum, ag) => sum + parseFloat(ag.valor || 0), 0);
-    const saldoCaixa = data.fluxoCaixa.reduce((sum, fc) => {
-      return fc.tipo === 'RECEITA' ? sum + parseFloat(fc.valor) : sum - parseFloat(fc.valor);
-    }, 0);
+    const totalFaturamento = metricas.totalFaturamento || 0;
+    const saldoCaixa = metricas.saldoLiquido || 0;
 
     return { totalClientes, totalAgendamentos, totalFaturamento, saldoCaixa };
   };
@@ -46,10 +98,9 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
-          <h1 className="logo">KzeroDiary</h1>
+          <img src={logoKzero} alt="Kzero" className="logo-img" style={{ height: 40 }} />
           <button 
             className="toggle-sidebar"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -67,18 +118,32 @@ function App() {
             <span>Dashboard</span>
           </button>
           <button 
-            className={`nav-item ${currentPage === 'clientes' ? 'active' : ''}`}
-            onClick={() => setCurrentPage('clientes')}
+            className={`nav-item ${currentPage === 'calendario' ? 'active' : ''}`}
+            onClick={() => setCurrentPage('calendario')}
           >
-            <Users size={20} />
-            <span>Clientes</span>
+            <Calendar size={20} />
+            <span>Calendário</span>
           </button>
           <button 
             className={`nav-item ${currentPage === 'agendamentos' ? 'active' : ''}`}
             onClick={() => setCurrentPage('agendamentos')}
           >
-            <Calendar size={20} />
+            <FileText size={20} />
             <span>Agendamentos</span>
+          </button>
+          <button 
+            className={`nav-item ${currentPage === 'atas' ? 'active' : ''}`}
+            onClick={() => setCurrentPage('atas')}
+          >
+            <FileText size={20} />
+            <span>Atas</span>
+          </button>
+          <button 
+            className={`nav-item ${currentPage === 'anotacoes' ? 'active' : ''}`}
+            onClick={() => setCurrentPage('anotacoes')}
+          >
+            <FileText size={20} />
+            <span>Anotações</span>
           </button>
           <button 
             className={`nav-item ${currentPage === 'financeiro' ? 'active' : ''}`}
@@ -91,42 +156,75 @@ function App() {
             className={`nav-item ${currentPage === 'relatorios' ? 'active' : ''}`}
             onClick={() => setCurrentPage('relatorios')}
           >
-            <FileText size={20} />
+            <BarChart3 size={20} />
             <span>Relatórios</span>
           </button>
         </nav>
 
         <div className="sidebar-footer">
+          <button 
+            className="btn-tema"
+            onClick={() => setDarkMode(!darkMode)}
+            title="Alternar Tema"
+          >
+            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           <button className="btn-export" onClick={exportData}>
-            Exportar Dados
+            <Download size={16} /> Exportar
           </button>
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="main-content">
         <header className="app-header">
           <h2>{currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}</h2>
           <div className="header-info">
-            <span>Versão 1.0</span>
+            <span>v2.0</span>
           </div>
         </header>
 
         <div className="content">
           {currentPage === 'dashboard' && (
-            <Dashboard stats={stats} data={data} />
+            <Dashboard stats={stats} data={data} metricas={metricas} logoKzero={logoKzero} />
           )}
-          {currentPage === 'clientes' && (
-            <ClientesPage data={data} />
+          {currentPage === 'calendario' && (
+            <Calendario agendamentos={data.agendamentos} clientes={data.clientes} profissionais={profissionais} />
           )}
           {currentPage === 'agendamentos' && (
-            <AgendamentosPage data={data} />
+            <GerenciadorAgendamentos 
+              agendamentos={data.agendamentos}
+              setAgendamentos={setAgendamentos}
+              clientes={data.clientes}
+              profissionais={profissionais}
+            />
+          )}
+          {currentPage === 'atas' && (
+            <GerenciadorAtas 
+              atas={data.atas}
+              setAtas={setAtas}
+              clientes={data.clientes}
+              profissionais={profissionais}
+            />
+          )}
+          {currentPage === 'anotacoes' && (
+            <AnotacoesReembolsos 
+              anotacoes={data.anotacoes}
+              setAnotacoes={setAnotacoes}
+              reembolsos={data.reembolsos}
+              setReembolsos={setReembolsos}
+              clientes={data.clientes}
+            />
           )}
           {currentPage === 'financeiro' && (
-            <FinanceiroPage data={data} />
+            <FinanceiroAvancado 
+              fluxoCaixa={data.fluxoCaixa}
+              setFluxoCaixa={setFluxoCaixa}
+              agendamentos={data.agendamentos}
+              clientes={data.clientes}
+            />
           )}
           {currentPage === 'relatorios' && (
-            <RelatoriosPage data={data} />
+            <RelatoriosAvancados data={data} metricas={metricas} logoKzero={logoKzero} />
           )}
         </div>
       </main>
@@ -134,8 +232,7 @@ function App() {
   );
 }
 
-// Dashboard Component
-function Dashboard({ stats, data }) {
+function Dashboard({ stats, data, metricas, logoKzero }) {
   return (
     <div className="dashboard">
       <div className="stats-grid">
@@ -174,7 +271,7 @@ function Dashboard({ stats, data }) {
             <TrendingUp size={32} />
           </div>
           <div className="stat-content">
-            <h3>Saldo em Caixa</h3>
+            <h3>Saldo</h3>
             <p className="stat-number">R$ {stats.saldoCaixa.toFixed(2)}</p>
           </div>
         </div>
@@ -187,6 +284,8 @@ function Dashboard({ stats, data }) {
             <tr>
               <th>Data</th>
               <th>Cliente</th>
+              <th>Tipo</th>
+              <th>Profissional</th>
               <th>Horas</th>
               <th>Valor</th>
             </tr>
@@ -198,6 +297,8 @@ function Dashboard({ stats, data }) {
                 <tr key={ag.id}>
                   <td>{ag.data}</td>
                   <td>{cliente?.nome || 'N/A'}</td>
+                  <td>{ag.tipo || 'Consultoria'}</td>
+                  <td>{ag.profissional || '-'}</td>
                   <td>{ag.horas}h</td>
                   <td>R$ {parseFloat(ag.valor).toFixed(2)}</td>
                 </tr>
@@ -210,158 +311,56 @@ function Dashboard({ stats, data }) {
   );
 }
 
-// Clientes Page
-function ClientesPage({ data }) {
+function RelatoriosAvancados({ data, metricas, logoKzero }) {
   return (
-    <div className="page">
-      <h3>Lista de Clientes</h3>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Valor/Hora</th>
-            <th>Responsável</th>
-            <th>Agendamentos</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.clientes.map((cliente) => {
-            const agendamentos = data.agendamentos.filter(ag => ag.cliente == cliente.id);
-            return (
-              <tr key={cliente.id}>
-                <td>{cliente.nome}</td>
-                <td>R$ {parseFloat(cliente.valorHora).toFixed(2)}</td>
-                <td>{cliente.responsavelFinanceiro}</td>
-                <td>{agendamentos.length}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-// Agendamentos Page
-function AgendamentosPage({ data }) {
-  return (
-    <div className="page">
-      <h3>Agendamentos</h3>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Hora Início</th>
-            <th>Hora Fim</th>
-            <th>Descrição</th>
-            <th>Horas</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.agendamentos.map((ag) => (
-            <tr key={ag.id}>
-              <td>{ag.data}</td>
-              <td>{ag.horaInicio}</td>
-              <td>{ag.horaFim}</td>
-              <td>{ag.descricao}</td>
-              <td>{ag.horas}</td>
-              <td>R$ {parseFloat(ag.valor).toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-// Financeiro Page
-function FinanceiroPage({ data }) {
-  const receitas = data.fluxoCaixa.filter(fc => fc.tipo === 'RECEITA');
-  const despesas = data.fluxoCaixa.filter(fc => fc.tipo === 'DESPESA');
-  const totalReceitas = receitas.reduce((sum, r) => sum + parseFloat(r.valor), 0);
-  const totalDespesas = despesas.reduce((sum, d) => sum + parseFloat(d.valor), 0);
-
-  return (
-    <div className="page">
-      <div className="financeiro-summary">
-        <div className="card receita">
-          <h4>Receitas</h4>
-          <p>R$ {totalReceitas.toFixed(2)}</p>
-        </div>
-        <div className="card despesa">
-          <h4>Despesas</h4>
-          <p>R$ {totalDespesas.toFixed(2)}</p>
-        </div>
-        <div className="card saldo">
-          <h4>Saldo</h4>
-          <p>R$ {(totalReceitas - totalDespesas).toFixed(2)}</p>
-        </div>
+    <div className="relatorios-avancados">
+      <div className="relatorio-header">
+        <img src={logoKzero} alt="Kzero" style={{ height: 50, marginBottom: '1rem' }} />
+        <h2>Relatório de Gestão</h2>
+        <p>{new Date().toLocaleDateString('pt-BR')}</p>
       </div>
 
-      <h3>Fluxo de Caixa</h3>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Tipo</th>
-            <th>Categoria</th>
-            <th>Descrição</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.fluxoCaixa.map((fc) => (
-            <tr key={fc.id} className={fc.tipo === 'RECEITA' ? 'receita' : 'despesa'}>
-              <td>{fc.data}</td>
-              <td>{fc.tipo}</td>
-              <td>{fc.categoria}</td>
-              <td>{fc.descricao}</td>
-              <td>R$ {parseFloat(fc.valor).toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-// Relatórios Page
-function RelatoriosPage({ data }) {
-  return (
-    <div className="page">
-      <h3>Relatórios</h3>
       <div className="relatorios-grid">
         <div className="relatorio-card">
-          <h4>Faturamento por Cliente</h4>
-          <ul>
-            {data.clientes.map((cliente) => {
-              const agendamentos = data.agendamentos.filter(ag => ag.cliente == cliente.id);
-              const total = agendamentos.reduce((sum, ag) => sum + parseFloat(ag.valor), 0);
-              return (
-                <li key={cliente.id}>
-                  <span>{cliente.nome}</span>
-                  <strong>R$ {total.toFixed(2)}</strong>
-                </li>
-              );
-            })}
-          </ul>
+          <h4>📊 Faturamento por Cliente</h4>
+          <table className="relatorio-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Valor</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(metricas.faturamentoPorCliente || {}).map(([cliente, valor]) => (
+                <tr key={cliente}>
+                  <td>{cliente}</td>
+                  <td>R$ {valor.toFixed(2)}</td>
+                  <td>{metricas.totalFaturamento ? ((valor / metricas.totalFaturamento) * 100).toFixed(1) : 0}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="relatorio-card">
-          <h4>Horas Trabalhadas por Cliente</h4>
-          <ul>
-            {data.clientes.map((cliente) => {
-              const agendamentos = data.agendamentos.filter(ag => ag.cliente == cliente.id);
-              const totalHoras = agendamentos.reduce((sum, ag) => sum + parseFloat(ag.horas), 0);
-              return (
-                <li key={cliente.id}>
-                  <span>{cliente.nome}</span>
-                  <strong>{totalHoras.toFixed(1)}h</strong>
-                </li>
-              );
-            })}
-          </ul>
+          <h4>⏱️ Horas Trabalhadas por Cliente</h4>
+          <table className="relatorio-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Horas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(metricas.horasPorCliente || {}).map(([cliente, horas]) => (
+                <tr key={cliente}>
+                  <td>{cliente}</td>
+                  <td>{horas.toFixed(1)}h</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

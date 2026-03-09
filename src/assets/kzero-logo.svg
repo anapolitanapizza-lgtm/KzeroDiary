@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo -->
+  <rect width="200" height="200" fill="#F5F3FF"/>
+  
+  <!-- Círculo de fundo roxo -->
+  <circle cx="100" cy="100" r="90" fill="#7C3AED" opacity="0.1"/>
+  
+  <!-- Letra K em roxo -->
+  <g fill="#7C3AED">
+    <!-- Vertical da letra K -->
+    <rect x="50" y="40" width="15" height="120" rx="7"/>
+    
+    <!-- Diagonal superior da letra K -->
+    <rect x="65" y="50" width="15" height="80" rx="7" transform="rotate(45 72.5 90)"/>
+    
+    <!-- Diagonal inferior da letra K -->
+    <rect x="65" y="110" width="15" height="80" rx="7" transform="rotate(-45 72.5 150)"/>
+  </g>
+  
+  <!-- Texto "ZERO" -->
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#7C3AED" text-anchor="middle">ZERO</text>
+  
+  <!-- Círculo decorativo -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#7C3AED" stroke-width="2" opacity="0.3"/>
+</svg>
