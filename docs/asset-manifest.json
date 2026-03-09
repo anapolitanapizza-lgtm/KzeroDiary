@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fbe4903f.css",
+    "main.js": "/static/js/main.d5ca094c.js",
+    "static/media/kzero-logo.png": "/static/media/kzero-logo.1229cc1c48e5e0bdb4ce.png",
+    "index.html": "/index.html",
+    "main.fbe4903f.css.map": "/static/css/main.fbe4903f.css.map",
+    "main.d5ca094c.js.map": "/static/js/main.d5ca094c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fbe4903f.css",
+    "static/js/main.d5ca094c.js"
+  ]
+}
