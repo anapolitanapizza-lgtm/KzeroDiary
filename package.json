@@ -1,6 +1,7 @@
 {
   "name": "kzerodiary",
   "version": "1.0.0",
+  "homepage": "https://consultoriakzero-netizen.github.io/KzeroDiary/",
   "description": "Sistema de gestão de consultoria - Controle de clientes, agendamentos, fluxo de caixa e financeiro",
   "private": true,
   "dependencies": {
@@ -41,10 +42,4 @@
   "devDependencies": {
     "gh-pages": "^6.3.0"
   }
-{
-  "name": "kzerodiary",
-  "version": "1.0.0",
-  "homepage": "https://consultoriakzero-netizen.github.io/KzeroDiary/",
-  ...
-}
 }
