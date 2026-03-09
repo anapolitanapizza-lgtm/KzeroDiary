@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
 
+const generateId = () =>
+  typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
 const tiposAtividade = {
   CONSULTORIA: 'Consultoria',
   TREINAMENTO: 'Treinamento',
@@ -16,7 +21,7 @@ export const GerenciadorAgendamentos = ({ agendamentos, setAgendamentos, cliente
 
   const criarAgendamento = () => {
     setNovoAgendamento({
-      id: Date.now(),
+      id: generateId(),
       data: new Date().toISOString().split('T')[0],
       horaInicio: '09:00',
       horaFim: '10:00',
@@ -52,7 +57,7 @@ export const GerenciadorAgendamentos = ({ agendamentos, setAgendamentos, cliente
   };
 
   const calcularValor = (horas, clienteId) => {
-    const cliente = clientes.find(c => c.id == clienteId);
+    const cliente = clientes.find(c => String(c.id) === String(clienteId));
     if (!cliente) return '0';
     return (parseFloat(horas) * parseFloat(cliente.valorHora)).toFixed(2);
   };
@@ -329,7 +334,7 @@ export const GerenciadorAgendamentos = ({ agendamentos, setAgendamentos, cliente
             </thead>
             <tbody>
               {agendamentosFiltrados.map(agendamento => {
-                const cliente = clientes.find(c => c.id == agendamento.cliente);
+                const cliente = clientes.find(c => String(c.id) === String(agendamento.cliente));
                 return (
                   <tr key={agendamento.id} className={`tipo-${agendamento.tipo.toLowerCase()}`}>
                     <td>{agendamento.data}</td>

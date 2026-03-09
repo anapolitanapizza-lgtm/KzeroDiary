@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 
+const generateId = () =>
+  typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
 export const GerenciadorAtas = ({ atas, setAtas, clientes, profissionais }) => {
   const [novaAta, setNovaAta] = useState(null);
   const [editandoAta, setEditandoAta] = useState(null);
@@ -9,7 +14,7 @@ export const GerenciadorAtas = ({ atas, setAtas, clientes, profissionais }) => {
 
   const criarAta = () => {
     setNovaAta({
-      id: Date.now(),
+      id: generateId(),
       data: new Date().toISOString().split('T')[0],
       hora: '09:00',
       horaFim: '10:00',
@@ -23,7 +28,7 @@ export const GerenciadorAtas = ({ atas, setAtas, clientes, profissionais }) => {
   const adicionarPauta = () => {
     if (!novaAta) return;
     const novasPautas = [...(novaAta.pautas || []), {
-      id: Date.now(),
+      id: generateId(),
       titulo: '',
       deliberacao: '',
       responsaveis: '',
@@ -253,7 +258,7 @@ export const GerenciadorAtas = ({ atas, setAtas, clientes, profissionais }) => {
           <p className="sem-dados">Nenhuma ata registrada</p>
         ) : (
           atasFiltradas.map(ata => {
-            const cliente = clientes.find(c => c.id == ata.clienteId);
+            const cliente = clientes.find(c => String(c.id) === String(ata.clienteId));
             const isExpandida = expandidas[ata.id];
             
             return (

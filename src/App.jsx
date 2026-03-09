@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Calendar, Users, TrendingUp, FileText, Menu, Home, Download, Moon, Sun, Settings, BarChart3 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Calendar, Users, TrendingUp, FileText, Menu, Home, Download, Moon, Sun, Upload, BarChart3 } from 'lucide-react';
 import './App.css';
 import backupData from './data/backup.json';
 import { calcularMetricas, exportToExcel, exportToCSV } from './utils/exportUtils';
@@ -19,6 +19,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [data, setData] = useState(backupData.dados);
   const [metricas, setMetricas] = useState({});
+  const importRef = useRef(null);
 
   const [profissionais] = useState(['Bianca', 'Janaína', 'Consultor 1', 'Consultor 2']);
 
@@ -71,6 +72,25 @@ function App() {
   const setAtas = (novosDados) => {
     setData({ ...data, atas: novosDados });
     localStorage.setItem('kzerodiary_data', JSON.stringify({ ...data, atas: novosDados }));
+  };
+
+  const importData = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const backup = JSON.parse(ev.target.result);
+        if (!backup.dados) throw new Error('Formato inválido');
+        setData(backup.dados);
+        localStorage.setItem('kzerodiary_data', JSON.stringify(backup.dados));
+        alert('Backup importado com sucesso!');
+      } catch {
+        alert('Erro: arquivo de backup inválido.');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
   };
 
   const exportData = () => {
@@ -175,6 +195,10 @@ function App() {
           <button className="btn-export" onClick={exportData}>
             <Download size={16} /> Exportar
           </button>
+          <button className="btn-export" onClick={() => importRef.current?.click()} title="Importar backup">
+            <Upload size={16} /> Importar
+          </button>
+          <input ref={importRef} type="file" accept=".json" onChange={importData} style={{ display: 'none' }} />
         </div>
       </aside>
 
@@ -295,7 +319,7 @@ function Dashboard({ stats, data, metricas, logoKzero }) {
           </thead>
           <tbody>
             {data.agendamentos.slice(0, 5).map((ag) => {
-              const cliente = data.clientes.find(c => c.id == ag.cliente);
+              const cliente = data.clientes.find(c => String(c.id) === String(ag.cliente));
               return (
                 <tr key={ag.id}>
                   <td>{ag.data}</td>

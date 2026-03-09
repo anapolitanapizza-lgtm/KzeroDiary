@@ -112,7 +112,7 @@ export const calcularMetricas = (data) => {
   const horasPorCliente = {};
   
   agendamentos.forEach(a => {
-    const cliente = clientes.find(c => c.id == a.cliente);
+    const cliente = clientes.find(c => String(c.id) === String(a.cliente));
     const nomeCliente = cliente ? cliente.nome : 'Desconhecido';
     
     faturamentoPorCliente[nomeCliente] = (faturamentoPorCliente[nomeCliente] || 0) + parseFloat(a.valor || 0);

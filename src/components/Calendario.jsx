@@ -125,7 +125,7 @@ export const Calendario = ({ agendamentos, clientes, profissionais, onFiltroChan
                   <div className="numero-dia">{dia}</div>
                   <div className="eventos-dia">
                     {getAgendamentosDoDay(dia).map((evento) => {
-                      const cliente = clientes.find(c => c.id == evento.cliente);
+                      const cliente = clientes.find(c => String(c.id) === String(evento.cliente));
                       const tipo = evento.tipo || 'CONSULTORIA';
                       const corTipo = tiposAtividade[tipo];
                       
