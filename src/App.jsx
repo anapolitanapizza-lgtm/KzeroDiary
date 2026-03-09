@@ -11,7 +11,7 @@ import { GerenciadorAgendamentos } from './components/GerenciadorAgendamentos';
 import logoKzero from './assets/kzero-logo.png';
 
 // Para funcionar em subpasta do GitHub Pages
-const BASENAME = process.env.PUBLIC_URL || '';
+const BASENAME = import.meta.env.BASE_URL || '';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
