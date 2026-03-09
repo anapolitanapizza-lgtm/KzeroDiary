@@ -10,6 +10,9 @@ import { FinanceiroAvancado } from './components/FinanceiroAvancado';
 import { GerenciadorAgendamentos } from './components/GerenciadorAgendamentos';
 import logoKzero from './assets/kzero-logo.png';
 
+// Para funcionar em subpasta do GitHub Pages
+const BASENAME = process.env.PUBLIC_URL || '';
+
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
