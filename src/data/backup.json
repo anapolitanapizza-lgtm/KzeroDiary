@@ -1,0 +1,533 @@
+{
+  "versao": "1.0",
+  "geradoEm": "2026-03-09T13:19:23.947Z",
+  "dados": {
+    "clientes": [
+      {
+        "nome": "Interforma ",
+        "email": "",
+        "valorHora": "180",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Lira Vieira",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059104987
+      },
+      {
+        "nome": "Magna Engenharia - Presencial",
+        "email": "",
+        "valorHora": "200",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Marcelo Goulart",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059124087
+      },
+      {
+        "nome": "Magna Engenharia - Remoto",
+        "email": "",
+        "valorHora": "150",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Marcelo Goulart",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059141969
+      },
+      {
+        "nome": "Valge",
+        "email": "",
+        "valorHora": "130",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Beatriz Miranda",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059155868
+      },
+      {
+        "nome": "Reitz",
+        "email": "",
+        "valorHora": "160.71",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Kelma Flores",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059178596
+      },
+      {
+        "nome": "Sadel",
+        "email": "",
+        "valorHora": "120",
+        "dataContratacao": "",
+        "responsavelFinanceiro": "Andrea",
+        "emailFinanceiro": "",
+        "contratos": [],
+        "id": 1773059194037
+      }
+    ],
+    "agendamentos": [
+      {
+        "id": 1773059220277,
+        "data": "2026-03-09",
+        "horaInicio": "09:18",
+        "horaFim": "17:00",
+        "cliente": "1773059104987",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "6.7",
+        "valor": "1206.00"
+      },
+      {
+        "id": 1773059620278,
+        "data": "2026-03-02",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059178596",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1124.97"
+      },
+      {
+        "id": 1773059644164,
+        "data": "2026-03-04",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059104987",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1260.00"
+      },
+      {
+        "id": 1773059664887,
+        "data": "2026-03-05",
+        "horaInicio": "08:45",
+        "horaFim": "11:40",
+        "cliente": "1773059124087",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "2.9",
+        "valor": "583.33"
+      },
+      {
+        "id": 1773059770938,
+        "data": "2026-03-05",
+        "horaInicio": "14:00",
+        "horaFim": "17:30",
+        "cliente": "1773059141969",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "3.5",
+        "valor": "525.00"
+      },
+      {
+        "id": 1773059808732,
+        "data": "2026-03-05",
+        "horaInicio": "14:00",
+        "horaFim": "17:00",
+        "cliente": "1773059178596",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "3.0",
+        "valor": "482.13"
+      },
+      {
+        "id": 1773060023093,
+        "data": "2026-03-10",
+        "horaInicio": "10:00",
+        "horaFim": "17:00",
+        "cliente": "1773059124087",
+        "descricao": "Consultoria, precisei ir ao médico cedo.",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "6.0",
+        "valor": "1200.00"
+      },
+      {
+        "id": 1773060047146,
+        "data": "2026-03-13",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059178596",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1124.97"
+      },
+      {
+        "id": 1773060164332,
+        "data": "2026-03-16",
+        "horaInicio": "13:00",
+        "horaFim": "17:00",
+        "cliente": "1773059104987",
+        "descricao": "Consultoria e Treinamento",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "4.0",
+        "valor": "720.00"
+      },
+      {
+        "id": 1773060188400,
+        "data": "2026-03-17",
+        "horaInicio": "08:30",
+        "horaFim": "17:00",
+        "cliente": "1773059155868",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.5",
+        "valor": "975.00"
+      },
+      {
+        "id": 1773060252343,
+        "data": "2026-03-17",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059178596",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1124.97"
+      },
+      {
+        "id": 1773060269560,
+        "data": "2026-03-18",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059124087",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1400.00"
+      },
+      {
+        "id": 1773060289846,
+        "data": "2026-03-19",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059178596",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1124.97"
+      },
+      {
+        "id": 1773060308743,
+        "data": "2026-03-20",
+        "horaInicio": "08:00",
+        "horaFim": "17:00",
+        "cliente": "1773059194037",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "8.0",
+        "valor": "960.00"
+      },
+      {
+        "id": 1773060327421,
+        "data": "2026-03-23",
+        "horaInicio": "07:30",
+        "horaFim": "17:30",
+        "cliente": "1773059194037",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "9.0",
+        "valor": "1080.00"
+      },
+      {
+        "id": 1773060342472,
+        "data": "2026-03-24",
+        "horaInicio": "07:30",
+        "horaFim": "17:30",
+        "cliente": "1773059194037",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "9.0",
+        "valor": "1080.00"
+      },
+      {
+        "id": 1773060368915,
+        "data": "2026-03-25",
+        "horaInicio": "07:30",
+        "horaFim": "17:30",
+        "cliente": "1773059194037",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "9.0",
+        "valor": "1080.00"
+      },
+      {
+        "id": 1773060381395,
+        "data": "2026-03-26",
+        "horaInicio": "07:30",
+        "horaFim": "12:00",
+        "cliente": "1773059194037",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "4.5",
+        "valor": "540.00"
+      },
+      {
+        "id": 1773060406230,
+        "data": "2026-03-27",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059155868",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "910.00"
+      },
+      {
+        "id": 1773060428527,
+        "data": "2026-03-30",
+        "horaInicio": "08:00",
+        "horaFim": "17:00",
+        "cliente": "1773059104987",
+        "descricao": "Consultoria - Remoto",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "8.0",
+        "valor": "1440.00"
+      },
+      {
+        "id": 1773060443295,
+        "data": "2026-03-31",
+        "horaInicio": "09:00",
+        "horaFim": "17:00",
+        "cliente": "1773059124087",
+        "descricao": "Consultoria",
+        "lancadoPor": "Bianca",
+        "temPausa": true,
+        "pausaMinutos": 60,
+        "horas": "7.0",
+        "valor": "1400.00"
+      },
+      {
+        "id": 1773060840991,
+        "data": "2026-03-25",
+        "horaInicio": "03:00",
+        "horaFim": "18:00",
+        "cliente": "1773059124087",
+        "descricao": "Saldo acumulado",
+        "lancadoPor": "Bianca",
+        "temPausa": false,
+        "pausaMinutos": 60,
+        "horas": "15.0",
+        "valor": "3000.00"
+      }
+    ],
+    "fluxoCaixa": [
+      {
+        "id": 1773061346700,
+        "data": "2026-03-06",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Interforma",
+        "valor": "3405.00",
+        "clienteId": "1773059104987"
+      },
+      {
+        "id": 1773061372706,
+        "data": "2026-03-06",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Valge",
+        "valor": "3683.33",
+        "clienteId": "1773059155868"
+      },
+      {
+        "id": 1773061431017,
+        "data": "2026-03-06",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Sadel",
+        "valor": "2880.00",
+        "clienteId": "1773059194037"
+      },
+      {
+        "id": 1773061495322,
+        "data": "2026-03-06",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Magna",
+        "valor": "6611.11",
+        "clienteId": "1773059124087"
+      },
+      {
+        "id": 1773061516986,
+        "data": "2026-03-06",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Reitz",
+        "valor": "2732.14",
+        "clienteId": "1773059178596"
+      },
+      {
+        "id": 1773061553700,
+        "data": "2026-03-31",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Impostos",
+        "descricao": "Parcelamento SN",
+        "valor": "500.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061584399,
+        "data": "2026-03-15",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Impostos",
+        "descricao": "Simples Nacional",
+        "valor": "1564.96",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061603535,
+        "data": "2026-03-15",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Fornecedores",
+        "descricao": "Claro",
+        "valor": "220.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061623024,
+        "data": "2026-03-31",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Outros Passivos",
+        "descricao": "CRC Bianca - Parc 03/03",
+        "valor": "117.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061649769,
+        "data": "2026-03-06",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Outros Passivos",
+        "descricao": "Dia da Mulher - Bianca",
+        "valor": "177.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061674194,
+        "data": "2026-03-10",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Outros Passivos",
+        "descricao": "Cartão de crédito - Janeiro e Fevereiro",
+        "valor": "2276.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061722257,
+        "data": "2026-03-06",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Salários",
+        "descricao": "Distribuição de Lucros Bianca",
+        "valor": "6573.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061742628,
+        "data": "2026-03-06",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Salários",
+        "descricao": "Distribuição de Lucros - Janaína",
+        "valor": "7000.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061802382,
+        "data": "2026-03-31",
+        "tipo": "DESPESA",
+        "classificacao": "PASSIVO",
+        "categoria": "Empréstimos",
+        "descricao": "Regina",
+        "valor": "874.00",
+        "clienteId": ""
+      },
+      {
+        "id": 1773061844673,
+        "data": "2026-03-24",
+        "tipo": "RECEITA",
+        "classificacao": "ATIVO",
+        "categoria": "Banco",
+        "descricao": "Recebimento Magna - Acumulado",
+        "valor": "3000.00",
+        "clienteId": "1773059124087"
+      }
+    ],
+    "reembolsos": [],
+    "anotacoes": [
+      {
+        "id": 1773059301817,
+        "data": "2026-03-09",
+        "clienteId": "1773059104987",
+        "titulo": "Consultoria",
+        "conteudo": "Atividades:\n- Inspeção de EPI na fábrica\n- Apresentação de resultados com a fiscalização anterior"
+      }
+    ],
+    "atas": [
+      {
+        "id": 1773060949966,
+        "data": "2026-03-09",
+        "hora": "09:55",
+        "local": "Interforma",
+        "clienteId": "1773059104987",
+        "pauta": "TESTE",
+        "participantes": "BIANCA, LIRA, PRISCILA",
+        "deliberacoes": "1. TESTE\n2.TESTE\n3. TESTE",
+        "responsaveis": "BIANCA",
+        "proximaReuniao": "10/03/2026",
+        "emailsDestinatarios": "bianca@kzeroconsultoria.com.br"
+      }
+    ]
+  }
+}
