@@ -336,19 +336,19 @@ export const GerenciadorAgendamentos = ({ agendamentos, setAgendamentos, cliente
               {agendamentosFiltrados.map(agendamento => {
                 const cliente = clientes.find(c => String(c.id) === String(agendamento.cliente));
                 return (
-                  <tr key={agendamento.id} className={`tipo-${agendamento.tipo.toLowerCase()}`}>
+                  <tr key={agendamento.id} className={`tipo-${(agendamento.tipo || 'consultoria').toLowerCase()}`}>
                     <td>{agendamento.data}</td>
                     <td>{agendamento.horaInicio} - {agendamento.horaFim}</td>
                     <td>{cliente?.nome || 'N/A'}</td>
                     <td>
-                      <span className={`badge tipo-${agendamento.tipo.toLowerCase()}`}>
-                        {tiposAtividade[agendamento.tipo]}
+                      <span className={`badge tipo-${(agendamento.tipo || 'consultoria').toLowerCase()}`}>
+                        {tiposAtividade[agendamento.tipo] || 'Consultoria'}
                       </span>
                     </td>
                     <td>{agendamento.profissional || '-'}</td>
                     <td>{agendamento.horas || '-'}</td>
                     <td>
-                      {agendamento.tipo === 'PESSOAL' ? '-' : `R$ ${parseFloat(agendamento.valor).toFixed(2)}`}
+                      {agendamento.tipo === 'PESSOAL' ? '-' : `R$ ${parseFloat(agendamento.valor || 0).toFixed(2)}`}
                     </td>
                     <td className="acoes">
                       <button 
